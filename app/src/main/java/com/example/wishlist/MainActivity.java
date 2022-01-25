@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private Button signInButton, signUpButton, signOutButton, showListButton, addItemButton;
 
     // create public static FirebaseHelper variable
-
+    // this will allow all the other activities to access this vat by referring to it as:
+    // MainActivity.firebaseHelper
+    public static FirebaseHelper firebaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // instantiate FirebaseHelper var
+        firebaseHelper = new FirebaseHelper();
 
         // Make references to xml elements
         nameET = findViewById(R.id.nameTV);
@@ -53,6 +56,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    /*
+    This is one of the life cycle methods that is built into AS. It is called automatically
+    everytime the app screen starts up. To learn more about life cycles, search "Android Life Cycle"
+     */
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -61,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void updateIfLoggedIn(){
         // Create reference to current user using firebaseHelper variable
+        FirebaseUser user = firebaseHelper.getmAuth().getCurrentUser();
 
         if (user != null) {
             signInButton.setVisibility(View.INVISIBLE);
