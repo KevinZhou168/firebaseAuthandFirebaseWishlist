@@ -45,19 +45,35 @@ public class FirebaseHelper {
     public final String TAG = "Denna";
     private static String uid = null;            // var will be updated for currently signed in user
     // inside MainActivity with the mAuth var
+    // Create the reference to FirebaseAuth and FirebaseFirestore that will allow us to access
+    // the current user and their data anywhere through a variable of this class
+    private  FirebaseAuth mAuth;
+    private  FirebaseFirestore db;
+    private ArrayList<WishListItem> myItems = new ArrayList<>();
+
+    public FirebaseHelper(){
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+    }
 
 
     private ArrayList<WishListItem> myItems = new ArrayList<>();
 
-    public FirebaseHelper() {
 
-    }
 
     public FirebaseAuth getmAuth() {
-
+        return mAuth;
     }
 
     public void attachReadDataToUser() {
+        // this method will help us avoid the issues we saw in the video with asynch method calls
+        // first verify there is a logged in user, and if there is set them up to read data
+        if (mAuth.getCurrentUser() != null){
+            uid = mAuth.getUid(); // we should have already updated this in MainActivity
+            // more here
+
+        }
 
     }
 
@@ -99,7 +115,7 @@ public class FirebaseHelper {
 
 //https://stackoverflow.com/questions/48499310/how-to-return-a-documentsnapshot-as-a-result-of-a-method/48500679#48500679
 public interface FirestoreCallback {
-
+    void onCallback(ArrayList<WishListItem> myList);
 }
 }
 

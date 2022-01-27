@@ -215,11 +215,8 @@ public class MainActivity extends AppCompatActivity {
     public void showList(View v) {
         Intent intent = new Intent(MainActivity.this, ViewListActivity.class);
         // use firebaseHelperCode to get List of data to display
-
-/* 
- * Enter Firebase Code here CODE here
- */
-        
+        ArrayList<WishListItem> myList = firebaseHelper.getWishListItems();
+        intent.putParcelableArrayListExtra("LIST", myList);
         startActivity(intent);
     }
 
