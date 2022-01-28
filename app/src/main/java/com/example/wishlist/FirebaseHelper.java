@@ -58,7 +58,7 @@ public class FirebaseHelper {
     }
 
 
-    private ArrayList<WishListItem> myItems = new ArrayList<>();
+    //private ArrayList<WishListItem> myItems = new ArrayList<>();
 
 
 
