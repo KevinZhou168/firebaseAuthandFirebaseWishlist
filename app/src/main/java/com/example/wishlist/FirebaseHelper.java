@@ -71,7 +71,12 @@ public class FirebaseHelper {
         // first verify there is a logged in user, and if there is set them up to read data
         if (mAuth.getCurrentUser() != null){
             uid = mAuth.getUid(); // we should have already updated this in MainActivity
-            // more here
+            readData(new FirestoreCallback() {
+                @Override
+                public void onCallback(ArrayList<WishListItem> myList) {
+                    Log.i(TAG, "Inside attachReadDataToUser, onCallBack" + myList.toString());
+                }
+            });
 
         }
 
@@ -79,6 +84,8 @@ public class FirebaseHelper {
 
 
     public void addUserToFirestore(String name, String newUID) {
+    // This will add a document with the uid of the current user to the collection called "users"
+    // For this we will create a Hash map since there are only two fields - a name and the uid value
 
     }
 
@@ -87,7 +94,7 @@ public class FirebaseHelper {
     }
 
     public ArrayList<WishListItem> getWishListItems() {
-
+        return myItems;
     }
     
     public void editData(WishListItem w) {
@@ -110,10 +117,37 @@ public class FirebaseHelper {
      */
 
     private void readData(FirestoreCallback firestoreCallback) {
+        myItems.clear(); // clear out the AL so that it can get a fresh copy of the data
+        db.collection("users").document(uid).collection("myWishList")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            // loop through ALL elements in the snapshot and convert them to WishList items
+                            // and then add them to my AL
+                            for (DocumentSnapshot doc: task.getResult()){
+                                // processing every resulting document from the query we made
+                                // this is a snapshot of the data at this moment in time when we
+                                // requested to get the data
 
+                                // to Object allows to pull the document from firestore and directly
+                                // convert into a Java object using the constructor
+                                WishListItem w = doc.toObject(WishListItem.class);
+                                myItems.add(w);
+                            }
+                            // still inside the onComplete method, I want to call my onCallback method
+                            // so that the interface can do do its job and let whoever is waiting know the
+                            // asych method is done
+                            Log.i(TAG, "Success reading data: " + myItems.toString());
+                            firestoreCallback.onCallback(myItems);
+                        }
+                    }
+                });
 }
 
 //https://stackoverflow.com/questions/48499310/how-to-return-a-documentsnapshot-as-a-result-of-a-method/48500679#48500679
+    // Interfaces only contain constants and public methods
 public interface FirestoreCallback {
     void onCallback(ArrayList<WishListItem> myList);
 }

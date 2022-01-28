@@ -76,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             signOutButton.setVisibility(View.VISIBLE);
             showListButton.setVisibility(View.VISIBLE);
             addItemButton.setVisibility(View.VISIBLE);
+            signUpResultTextView.setText(user.getEmail() + " signed in");
         }
         else {
             signInButton.setVisibility(View.VISIBLE);
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             signOutButton.setVisibility(View.INVISIBLE);
             showListButton.setVisibility(View.INVISIBLE);
             addItemButton.setVisibility(View.INVISIBLE);
-            signUpResultTextView.setText("");
+            signUpResultTextView.setText("No one is signed in");
             nameET.setText("");
             emailET.setText("");
             passwordET.setText("");
