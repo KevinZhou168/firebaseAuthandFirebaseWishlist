@@ -177,6 +177,12 @@ public class MainActivity extends AppCompatActivity {
                                 // update the uid var in FirebaseHelper so we know which user is logged in
                                 firebaseHelper.updateUid(user.getUid());
 
+                                // This is needed to help with asych method calls in firebase
+                                firebaseHelper.attachReadDataToUser();
+
+                                // update UI
+                                updateIfLoggedIn();
+
                                 // include code to go to a new screen with an intent
                                 Intent intent = new Intent(getApplicationContext(), AddItemActivity.class);
                                 startActivity(intent);

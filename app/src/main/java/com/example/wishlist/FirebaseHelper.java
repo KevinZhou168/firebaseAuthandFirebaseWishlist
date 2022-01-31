@@ -87,9 +87,47 @@ public class FirebaseHelper {
     // This will add a document with the uid of the current user to the collection called "users"
     // For this we will create a Hash map since there are only two fields - a name and the uid value
 
+        // tje docID of the document we are adding will be equal to the uid of the current user
+        // similar to how I said "we are making a new folder for this user"
+        Map<String, Object> user = new HashMap<>();
+
+        // put data into my object using a key value pair where I label each item I put in the Map
+        // the key "nam" is the key that is used to label the data in firestore
+        // the parameter value of name is passed in to be the value assigned to name in firestore
+        user.put("name", name);
+
+        // this will create a new document in the collection "users" and assign it a docID
+        // that is equal to newID
+        db.collection("users").document(newUID)
+                .set(user)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.i(TAG, name + "'s user account added");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "Error adding user account", e);
+                    }
+                });
     }
 
     public void addData(WishListItem wish) {
+        // add a WishListItem to the data
+        // this method will be overloaded and the other method will incorporate the interface to
+        // handle asynch calls for reading data to keep myItems AL up to date
+        addData(wish, new FirestoreCallback() {
+            @Override
+            public void onCallback(ArrayList<WishListItem> myList) {
+                Log.i(TAG, "Indide addData, finished: " + myList.toString());
+            }
+        });
+    }
+
+    // This method will do the actual work of adding the WishListItem to database
+    private void addData(WishListItem w, FirestoreCallback firestoreCallback){
 
     }
 
