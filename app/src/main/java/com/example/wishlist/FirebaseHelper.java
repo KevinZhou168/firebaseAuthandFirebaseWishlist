@@ -128,7 +128,37 @@ public class FirebaseHelper {
 
     // This method will do the actual work of adding the WishListItem to database
     private void addData(WishListItem w, FirestoreCallback firestoreCallback){
+        db.collection("users").document(uid).collection("myWishList")
+                .add(w)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        // we are going to update the document we JUST added by editing the docID
+                        // instance variable so that it knows what the value is for its focID in
+                        // firestore
 
+                        // in the onSuccess method, the documentReference parameter contains a reference
+                        // to the newly created document. We can use this to extract the docID from firestore
+                        db.collection("users").document(uid).collection("myWishList")
+                                .document(documentReference.getId())
+                                .update("docID", documentReference.getId());
+                        Log.i(TAG, "just added " + w.getItemName());
+
+                        // If we want the arrayList to be updated NOW, we call
+                        // readData. If we don't care about continuing our work,
+                        // then you don't need to call readData
+
+                        // later on, practice experiment with commenting this line out, see how it is
+                        // different
+                        readData(firestoreCallback);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "Error adding element", e);
+                    }
+                });
     }
 
     public ArrayList<WishListItem> getWishListItems() {
@@ -148,10 +178,10 @@ public class FirebaseHelper {
     }
 
     /* https://www.youtube.com/watch?v=0ofkvm97i0s
-    This video is good!!!   Basically he talks about what it means for tasks to be asychronous
+    This video is good!!!   Basically he talks about what it means for tasks to be asynchronous
     and how you can create an interface and then using that interface pass an object of the interface
     type from a callback method and access it after the callback method.  It also allows you to delay
-    certain things from occuring until after the onSuccess is finished.
+    certain things from occurring until after the onSuccess is finished.
      */
 
     private void readData(FirestoreCallback firestoreCallback) {
