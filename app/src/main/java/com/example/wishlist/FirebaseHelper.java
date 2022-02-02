@@ -54,13 +54,8 @@ public class FirebaseHelper {
     public FirebaseHelper(){
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-
+        attachReadDataToUser();
     }
-
-
-    //private ArrayList<WishListItem> myItems = new ArrayList<>();
-
-
 
     public FirebaseAuth getmAuth() {
         return mAuth;
@@ -74,12 +69,14 @@ public class FirebaseHelper {
             readData(new FirestoreCallback() {
                 @Override
                 public void onCallback(ArrayList<WishListItem> myList) {
-                    Log.i(TAG, "Inside attachReadDataToUser, onCallBack" + myList.toString());
+                    Log.d(TAG, "Inside attachReadDataToUser, onCallBack" + myList.toString());
                 }
             });
 
         }
-
+        else{
+            Log.d(TAG, "No one logged in");
+        }
     }
 
 
@@ -164,17 +161,74 @@ public class FirebaseHelper {
     public ArrayList<WishListItem> getWishListItems() {
         return myItems;
     }
-    
-    public void editData(WishListItem w) {
 
+    public void editData(WishListItem w) {
+        // edit WishListItem w to the database
+        // this method is overloaded and incorporates the interface to handle the asynch calls
+        editData(w, new FirestoreCallback() {
+            @Override
+            public void onCallback(ArrayList<WishListItem> myList) {
+                Log.i(TAG, "Inside editData, onCallback " + myList.toString());
+            }
+        });
+    }
+
+    private void editData(WishListItem w, FirestoreCallback firestoreCallback) {
+        String docId = w.getDocID();
+        db.collection("users").document(uid).collection("myWishList")
+                .document(docId)
+                .set(w)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.i(TAG, "Success updating document");
+                        readData(firestoreCallback);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i(TAG, "Error updating document", e);
+                    }
+                });
     }
 
     public void deleteData(WishListItem w) {
+        // delete item w from database
+        // this method is overloaded and incorporates the interface to handle the asynch calls
+        deleteData(w, new FirestoreCallback() {
+            @Override
+            public void onCallback(ArrayList<WishListItem> myList) {
+                Log.i(TAG, "Inside deleteData, onCallBack" + myList.toString());
+            }
+        });
 
     }
 
-    public void updateUid(String uid) {
+    public void deleteData(WishListItem w, FirestoreCallback firestoreCallback) {
+        // delete item w from database
+        String docId = w.getDocID();
+        db.collection("users").document(uid).collection("myWishList")
+                .document(docId)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.i(TAG, w.getItemName() + " successfully deleted");
+                        readData(firestoreCallback);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.i(TAG, "Error deleting document", e);
+                    }
+                });
+    }
 
+    public void updateUid(String uid) {
+        this.uid = uid;
+        Log.i(TAG, "users uid set to: " + uid);
     }
 
     /* https://www.youtube.com/watch?v=0ofkvm97i0s
@@ -209,6 +263,9 @@ public class FirebaseHelper {
                             // asych method is done
                             Log.i(TAG, "Success reading data: " + myItems.toString());
                             firestoreCallback.onCallback(myItems);
+                        }
+                        else{
+                            Log.d(TAG, "Error getting documents: " + task.getException());
                         }
                     }
                 });

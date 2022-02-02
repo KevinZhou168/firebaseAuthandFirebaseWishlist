@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             signOutButton.setVisibility(View.VISIBLE);
             showListButton.setVisibility(View.VISIBLE);
             addItemButton.setVisibility(View.VISIBLE);
-            firebaseHelper.attachReadDataToUser();
+            //firebaseHelper.attachReadDataToUser();
             signUpResultTextView.setText(user.getEmail() + " signed in");
         }
         else {
