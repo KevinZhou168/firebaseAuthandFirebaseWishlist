@@ -9,6 +9,7 @@
     <Button
         android:id="@+id/signOutButton2"
         style="@style/myButton"
+        android:background="@drawable/round"
         android:onClick="goHome"
         android:text="Home"
         android:visibility="visible"
@@ -41,6 +42,7 @@
     <Button
         android:id="@+id/addItemButton"
         style="@style/submitButton"
+        android:background="@drawable/round"
         android:onClick="updateData"
         android:text="Edit item"
         app:layout_constraintEnd_toEndOf="@+id/itemLocation"
@@ -49,6 +51,7 @@
     <Button
         android:id="@+id/showListButton"
         style="@style/myButton"
+        android:background="@drawable/round"
         android:text="Delete"
         android:onClick="deleteItem"
         app:layout_constraintStart_toStartOf="@+id/itemLocation"
@@ -57,6 +60,7 @@
     <Button
         android:id="@+id/signOutButton"
         style="@style/myButton"
+        android:background="@drawable/round"
         android:onClick="showList"
         android:text="Show List"
         android:visibility="visible"

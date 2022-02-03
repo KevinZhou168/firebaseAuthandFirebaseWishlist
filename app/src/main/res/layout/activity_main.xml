@@ -53,6 +53,7 @@
     <Button
         android:id="@+id/signInButton"
         style="@style/myButton"
+        android:background="@drawable/round"
         android:text="Sign in"
         android:onClick="signIn"
         app:layout_constraintStart_toStartOf="@+id/passwordTV"
@@ -61,8 +62,9 @@
     <Button
         android:id="@+id/showListButton"
         style="@style/myButton"
-        android:text="Show List"
+        android:background="@drawable/round"
         android:onClick="showList"
+        android:text="Show List"
         android:visibility="invisible"
         app:layout_constraintStart_toStartOf="@+id/passwordTV"
         app:layout_constraintTop_toBottomOf="@+id/passwordTV" />
@@ -70,20 +72,23 @@
     <Button
         android:id="@+id/signUpButton"
         style="@style/myButton"
-        android:text="Sign Up"
+        android:background="@drawable/round"
         android:onClick="signUp"
+        android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="@+id/passwordTV"
         app:layout_constraintTop_toBottomOf="@+id/passwordTV" />
+
 
     <Button
         android:id="@+id/addItemButton"
         style="@style/myButton"
-        android:text="Add Item"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/round"
         android:onClick="addData"
-        android:visibility="invisible"
+        android:text="Add Item"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/passwordTV"
         app:layout_constraintTop_toBottomOf="@+id/passwordTV" />
-
 
     <TextView
         android:id="@+id/signUpResultTV"
@@ -99,6 +104,7 @@
         android:id="@+id/signOutButton"
         style="@style/myButton"
         android:layout_marginTop="120dp"
+        android:background="@drawable/round"
         android:onClick="signOutUser"
         android:text="Sign Out"
         android:visibility="visible"
