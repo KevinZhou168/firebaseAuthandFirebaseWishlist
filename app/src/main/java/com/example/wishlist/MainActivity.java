@@ -213,11 +213,12 @@ public class MainActivity extends AppCompatActivity {
 
         // update the uid var we are maintaining in FirebaseHelper class
         firebaseHelper.updateUid(null); // note that null is not in quotes
+        updateIfLoggedIn();
 
+        Log.d(TAG, "User logged out");
         nameET.setText("");
         emailET.setText("");
         passwordET.setText("");
-        updateIfLoggedIn();
     }
 
     public void showList(View v) {
