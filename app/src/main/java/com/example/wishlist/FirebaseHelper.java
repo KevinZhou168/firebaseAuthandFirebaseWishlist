@@ -41,6 +41,12 @@ import java.util.concurrent.Executor;
  * our other classes clean of the firebase code and also avoid having to update firebase code
  * in many places.  This is MUCH more efficient and less error prone.
  */
+
+/*
+        Query storeQuery = db.collection("myWishList")
+        .whereEqualTo("online", true).orderBy("index", Query.Direction.ASCENDING);
+*/
+
 public class FirebaseHelper {
     public final String TAG = "Denna";
     private static String uid = null;            // var will be updated for currently signed in user

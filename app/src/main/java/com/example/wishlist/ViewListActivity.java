@@ -11,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.core.Query;
+
 import java.util.ArrayList;
 
 public class ViewListActivity extends AppCompatActivity {
