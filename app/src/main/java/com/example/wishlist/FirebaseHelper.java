@@ -24,6 +24,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.core.OrderBy;
+import com.google.firebase.firestore.core.Query;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -163,7 +165,14 @@ public class FirebaseHelper {
                     }
                 });
     }
+    /*
+    public void orderList(DocumentReference documentReference){
+        DocumentReference listRef = db.collection("users").document(uid).collection("myWishList")
+                .document(documentReference.getId());
+        Query query = listRef.OrderBy("itemName");
 
+    }
+    */
     public ArrayList<WishListItem> getWishListItems() {
         return myItems;
     }
