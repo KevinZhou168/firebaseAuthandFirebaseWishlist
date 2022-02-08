@@ -4,24 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/design_default_color_error"
     tools:context=".MainActivity">
-
 
 
     <EditText
         android:id="@+id/nameTV"
         style="@style/myEditText"
+        android:layout_marginTop="@dimen/topMarginTopItem"
         android:hint="Enter Name to Create an account"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/topMarginTopItem" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/emailTV"
         style="@style/myEditText"
         android:hint="Enter Email"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameTV" />
@@ -30,6 +32,7 @@
         android:id="@+id/passwordTV"
         style="@style/myEditText"
         android:hint="Enter Password"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailTV" />
@@ -54,8 +57,8 @@
         android:id="@+id/signInButton"
         style="@style/myButton"
         android:background="@drawable/round"
-        android:text="Sign in"
         android:onClick="signIn"
+        android:text="Sign in"
         app:layout_constraintStart_toStartOf="@+id/passwordTV"
         app:layout_constraintTop_toBottomOf="@+id/passwordTV" />
 
@@ -63,6 +66,7 @@
         android:id="@+id/showListButton"
         style="@style/myButton"
         android:background="@drawable/round"
+        android:backgroundTint="@color/design_default_color_error"
         android:onClick="showList"
         android:text="Show List"
         android:visibility="invisible"
@@ -85,10 +89,16 @@
         android:layout_marginTop="28dp"
         android:background="@drawable/round"
         android:onClick="addData"
+        android:shadowColor="#4CAF50"
         android:text="Add Item"
+        android:textColor="@color/white"
+        android:textColorHighlight="#4CAF50"
+        android:textColorHint="#4CAF50"
+        android:textColorLink="#4CAF50"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="@+id/passwordTV"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTV" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordTV"
+        app:strokeColor="#4CAF50" />
 
     <TextView
         android:id="@+id/signUpResultTV"
@@ -103,6 +113,21 @@
     <Button
         android:id="@+id/signOutButton"
         style="@style/myButton"
+        android:layout_marginTop="204dp"
+        android:background="@drawable/round"
+        android:onClick="clearAll"
+        android:text="Clear"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTV" />
+
+    <Button
+        android:id="@+id/signOutButton3"
+        style="@style/myButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:background="@drawable/round"
         android:onClick="signOutUser"
@@ -111,8 +136,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordTV" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

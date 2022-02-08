@@ -169,7 +169,7 @@ public class FirebaseHelper {
     public void orderList(DocumentReference documentReference){
         DocumentReference listRef = db.collection("users").document(uid).collection("myWishList")
                 .document(documentReference.getId());
-        Query query = listRef.OrderBy("itemName");
+        Query query = listRef.sort("itemName");
 
     }
     */

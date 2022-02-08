@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.TreeSet;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -225,8 +229,22 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, ViewListActivity.class);
         // use firebaseHelperCode to get List of data to display
         ArrayList<WishListItem> myList = firebaseHelper.getWishListItems();
-        intent.putParcelableArrayListExtra("LIST", myList);
+//        Collection<WishListItem> sortedList =
+//                new TreeSet<WishListItem>(Collator.getInstance());
+//        for(WishListItem i : myList){
+//            sortedList.add(i);
+//        }
+        intent.putParcelableArrayListExtra("LIST", (ArrayList<? extends Parcelable>) myList);
         startActivity(intent);
+    }
+
+    public void clearAll(View v){
+        EditText field1 =(EditText)findViewById(R.id.nameTV);
+        EditText field2 =(EditText)findViewById(R.id.emailTV);
+        EditText field3 =(EditText)findViewById(R.id.passwordTV);
+        field1.setText("", TextView.BufferType.EDITABLE);
+        field2.setText("", TextView.BufferType.EDITABLE);
+        field3.setText("", TextView.BufferType.EDITABLE);
     }
 
 }

@@ -4,26 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/design_default_color_error"
     tools:context=".AddItemActivity">
 
     <EditText
         android:id="@+id/itemNameET"
         style="@style/myEditText"
+        android:layout_marginTop="@dimen/topMarginTopItem"
         android:ems="10"
         android:hint="Name of item"
         android:inputType="textPersonName"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/topMarginTopItem"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/itemLocation"
         style="@style/myEditText"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Store or url"
+        android:inputType="textPersonName"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemNameET" />
@@ -41,8 +44,8 @@
         android:id="@+id/showListButton"
         style="@style/myButton"
         android:background="@drawable/round"
-        android:text="Show List"
         android:onClick="seeList"
+        android:text="Show List"
         app:layout_constraintStart_toStartOf="@+id/itemLocation"
         app:layout_constraintTop_toBottomOf="@+id/itemLocation" />
 

@@ -2,6 +2,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <corners android:radius="200dp" />
     <stroke android:color="#000000" android:width="3dp" />
-    <solid android:color="#000cef" />
+    <solid android:color="#0A9F10" />
 </shape>
     <!--https://www.c-sharpcorner.com/article/custom-buttons-in-android-using-android-studio/-->
